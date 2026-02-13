@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Baby</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffecd2; /* Fallback color */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Nailong Background with Opacity */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('nailong.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.50; /* Adjust this value for more/less transparency */
+            z-index: -1;
+        }
+
+        .content-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.474); /* Slight transparency to see Nailong behind */
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            text-align: center;
+        }
+
+        .button-container {
+            width: 100%;
+            padding-bottom: 10px;
+        }
+
+        .next-button {
+            width: 100%;
+            padding: 16px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .next-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .next-button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <div class="message-box">
+            <h1>To my Baby 💕</h1>
+            <p>
+                HEY HUN!!! Hehehehehe first of I just wanted to say thay Iloveyousomuch. I know sometimes we dont see each other eye to eye so we may have our indifferences. But nonetheless hun Iloveyousomuch parin talaga, we have our strengths and our flaws but even still, we continue to understand, to grow, and to make ends meet with each other. Not only do we grow as a person but our relationship grows with us as well, making it even stronger than it was yesterday. What happened last night was purely my mistake and I just wanted to say how sorry I am for saying those unwanted words, I was clouded and didnt know much, and Im thankful that you understood me how I understood you as well. You not only complete me but you also give strength and love for me to be able to function properly each and everyday, and for that I will always be thankful for baby. For Valentines day I just want to ask you one simple Question🥰 
+            </p>
+            <p>(Press Next to Continue)</p>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="next-button" onclick="handleNext()">Next</button>
+    </div>
+
+    <script>
+        function handleNext() {
+            window.location.href = 'nxtpg.html';
+        }
+    </script>
+</body>
+</html>
