@@ -67,6 +67,10 @@
             line-height: 1.2;
         }
 
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+        }
+
         .button-container {
             display: flex;
             gap: 20px;
@@ -87,6 +91,7 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
             padding: 15px 40px;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #yesBtn {
@@ -102,29 +107,36 @@
             z-index: 10;
         }
 
-        /* FIXED: Perfect Circle Close Button */
+        /* FIXED: Perfect Circle Close Button for Mobile/Desktop */
         #closeBtn {
             position: fixed;
             top: 20px;
             right: 20px;
             background: #a1a1a1;
             color: white;
-            /* Using identical width and height for a perfect circle */
+            
+            /* Dimensions */
             width: 45px;
             height: 45px;
+            aspect-ratio: 1 / 1; 
             border-radius: 50%;
-            /* Flexbox ensures the 'x' is centered */
+            
+            /* Alignment */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            
+            /* Resetting mobile defaults */
+            padding: 0;
+            margin: 0;
             border: none;
+            line-height: 1;
+            -webkit-appearance: none; 
+            
+            font-size: 24px;
             cursor: pointer;
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            /* Reset line-height to prevent vertical displacement */
-            line-height: 0;
-            padding: 0;
         }
 
         #closeBtn:hover {
@@ -183,7 +195,6 @@
     </div>
 
     <script>
-        // Existing logic for buttons and hearts remains here...
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const closeBtn = document.getElementById('closeBtn');
@@ -197,12 +208,15 @@
         function handleNoAction(e) {
             e.preventDefault();
             noClickCount++;
+            
             if (noClickCount >= maxClicks) {
                growYesButtonFull();
                return;
             }
+
             const phraseIndex = Math.min(noClickCount, phrases.length - 1);
             noBtn.textContent = phrases[phraseIndex];
+            
             const scaleValue = 1 + (noClickCount * 0.5);
             yesBtn.style.transform = `scale(${scaleValue})`;
             
