@@ -22,14 +22,14 @@
             justify-content: center;
         }
 
-        /* Updated Fixed background with Nailong */
+        /* Fixed background with Nailong */
         .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #FFE5E5; /* Fallback */
+            background-color: #FFE5E5; 
             z-index: -2;
         }
 
@@ -43,7 +43,7 @@
             background-image: url('nailong.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.2; /* Adjust for desired visibility */
+            opacity: 0.2; 
         }
 
         .container {
@@ -67,10 +67,6 @@
             line-height: 1.2;
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-        }
-
         .button-container {
             display: flex;
             gap: 20px;
@@ -90,9 +86,7 @@
             transition: all 0.2s ease;
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
             padding: 15px 40px;
-            position: relative;
             user-select: none;
-            -webkit-tap-highlight-color: transparent;
         }
 
         #yesBtn {
@@ -107,16 +101,19 @@
             color: white;
             z-index: 10;
         }
-        
+
+        /* FIXED: Perfect Circle Close Button */
         #closeBtn {
             position: fixed;
             top: 20px;
             right: 20px;
             background: #a1a1a1;
             color: white;
+            /* Using identical width and height for a perfect circle */
             width: 45px;
             height: 45px;
             border-radius: 50%;
+            /* Flexbox ensures the 'x' is centered */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -125,6 +122,14 @@
             cursor: pointer;
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            /* Reset line-height to prevent vertical displacement */
+            line-height: 0;
+            padding: 0;
+        }
+
+        #closeBtn:hover {
+            background: #808080;
+            transform: scale(1.1);
         }
 
         .success {
@@ -139,16 +144,8 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .success h2 {
-            font-size: 3.5em;
-            color: #FF1493;
-            margin-bottom: 20px;
-        }
-
-        .success p {
-            font-size: 1.8em;
-            color: #FF69B4;
-        }
+        .success h2 { font-size: 3.5em; color: #FF1493; margin-bottom: 20px; }
+        .success p { font-size: 1.8em; color: #FF69B4; }
 
         .heart {
             position: fixed;
@@ -186,6 +183,7 @@
     </div>
 
     <script>
+        // Existing logic for buttons and hearts remains here...
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const closeBtn = document.getElementById('closeBtn');
@@ -194,7 +192,6 @@
         
         let noClickCount = 0;
         const maxClicks = 5; 
-        
         const phrases = ["No 😢", "Sure?", "Really sure?", "please?", "PLEASE??"];
 
         function handleNoAction(e) {
@@ -207,15 +204,16 @@
             const phraseIndex = Math.min(noClickCount, phrases.length - 1);
             noBtn.textContent = phrases[phraseIndex];
             const scaleValue = 1 + (noClickCount * 0.5);
+            yesBtn.style.transform = `scale(${scaleValue})`;
+            
             const yesRect = yesBtn.getBoundingClientRect();
             const yesCenterY = yesRect.top + (yesRect.height / 2);
-            yesBtn.style.transform = `scale(${scaleValue})`;
             const scaledHalfHeight = (yesBtn.offsetHeight * scaleValue) / 2;
-            const newTopPosition = yesCenterY + scaledHalfHeight + 20; 
+            
             noBtn.style.position = 'fixed';
             noBtn.style.left = '50%';
             noBtn.style.transform = 'translateX(-50%)';
-            noBtn.style.top = newTopPosition + 'px';
+            noBtn.style.top = (yesCenterY + scaledHalfHeight + 20) + 'px';
         }
 
         function growYesButtonFull() {
@@ -237,7 +235,7 @@
              closeBtn.style.display = 'none';
         }
 
-        yesBtn.addEventListener('click', function() {
+        yesBtn.addEventListener('click', () => {
             question.style.display = 'none';
             success.style.display = 'block';
             closeBtn.style.display = 'none';
@@ -257,7 +255,7 @@
                     heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
                     heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
                     document.body.appendChild(heart);
-                    setTimeout(() => { heart.remove(); }, 5000);
+                    setTimeout(() => heart.remove(), 5000);
                 }, i * 100);
             }
         }
